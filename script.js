@@ -82,6 +82,27 @@ const Game = (() => {
 
 })();// calling fx
 
+function checkScore () {
+    const allSquares = document.querySelectorAll(".square")
+    const winningCombination = [
+        [0,1,2], [3,4,5], [6,7,8],
+        [0,3,6], [1,4,7], [2,5,8],
+        [0,4,8], [2,4,6]
+    ]
+
+    winningCombination.forEach(array => {
+        const circleWins = array.every(squareDiv =>
+             allSquares[squareDiv].firstChild?.classList.contains("cross") )
+        if (circleWins) {
+            displayText.textContent = "wins "
+        }
+
+        const crossWins = 
+
+    }
+
+}
+
 
 
 
@@ -94,17 +115,17 @@ const Game = (() => {
 // start the game fx 
     //connect players names to 0 or X (inheritance with factory) DONE
     //clicked button event start  DONE
-    // when clicked any square, O or X is marked
+    // when clicked any square, O or X is marked DONE
   
     //click
     // add event listener (click) to squares DONE
-// take the index value of each square and check if clicked
-//if clicked display circle or ex. (if function here)
-// does this need to be inside Game? or outside? 
+//if clicked display circle or ex. (if function here) DONE
+
 
         // game handling
-    // alternate 0 and X for easier handle each click
-    //each square has a number to be identified ( selector index)
+    // alternate 0 and X for easier handle each click DONE
+    //each square has a number to be identified ( selector index) DONE
+
     //function to compare numbers and wins / looses (module?)
     //function winner (if fx)
     //fx rounds ( ++ winner player)
