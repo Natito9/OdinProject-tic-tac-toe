@@ -35,21 +35,21 @@ const createPlayer = (name,mark) =>{
 //IIFE
 const Game = (() => {
     let players = [];
-    let gameOver;
+    // let gameOver;
     let turn = "cross";
 
     const start = () => {
         //event listener to the button
         document.querySelector("#start-button").addEventListener("click", () => {
+           
+            players = [
+                createPlayer(document.querySelector("#player1").value, "cross"), // P1 gets cross
+                createPlayer(document.querySelector("#player2").value, "circle") // P2 gets circle
+            ];
+
             Gameboard.render(); //board its shown
 
-            players = [
-                createPlayer(document.querySelector("#player1").value, "x"), //P1 gets x
-                createPlayer(document.querySelector("#player2").value, "o") //P2 gets o
-            ];
-            // i need to conect the values with the class circle and cross
-
-            console.log(`Player 1: ${players[0].name} with mark: ${players[0].mark}, Player 2: ${players[1].name} with mark: ${players[1].mark}`);
+            // console.log(`Player 1: ${players[0].name} with mark: ${players[0].mark}, Player 2: ${players[1].name} with mark: ${players[1].mark}`);
         });
     };
 
@@ -57,14 +57,23 @@ const Game = (() => {
 
     const squareClick = (e) => {
 
-        console.log("clicked", e); //log which div is clicked(for fun)
+        console.log("clicked", e);                          //log which div is clicked(for fun)
 
-        const turnDisplay = document.createElement ("div")//create a div 
-        turnDisplay.classList.add(turn) //that div has a class of firstTurn = circle = css styling for .circle
-        e.target.append(turnDisplay) // apend this circle on div to my target ( square.div )
+        const turnDisplay = document.createElement ("div")  //create a div 
+        turnDisplay.classList.add(turn)                     //that div has a class of firstTurn = circle = css styling for .circle
+        e.target.append(turnDisplay)                        // apend this circle on div to my target ( square.div )
+       
         //alternate circle and cross        
         turn = turn === "cross" ? "circle" : "cross"
-       
+
+        let displayText = document.querySelector(".infoDisplay");
+        //connect turn with player
+        const currentPlayer = turn ==="cross" ? players[0] : players[1];
+        //display players name turn
+        displayText.textContent = "Its now " + currentPlayer.name + " turn's";
+
+
+       e.target.removeEventListener("click", squareClick) // cant click again
     };
 
     return {
@@ -72,6 +81,8 @@ const Game = (() => {
     };
 
 })();// calling fx
+
+
 
 
 
