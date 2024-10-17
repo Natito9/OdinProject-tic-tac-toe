@@ -1,4 +1,7 @@
 let players = [];
+let displayText = document.querySelector(".infoDisplay");
+
+
 /// IIFE 
 const Gameboard = (() => {
     // my gameboard exist
@@ -50,7 +53,7 @@ const Game = (() => {
 
             Gameboard.render(); //board its shown
 
-            checkScore(players);
+           
 
         });
     };
@@ -69,11 +72,13 @@ const Game = (() => {
         //alternate circle and cross        
         turn = turn === "cross" ? "circle" : "cross";
 
-        let displayText = document.querySelector(".infoDisplay");
+       
         //connect turn with player
         const currentPlayer = turn ==="cross" ? players[0] : players[1];
         //display players name turn
         displayText.textContent = "Its now " + currentPlayer.name + "'s turn";
+
+        checkScore(players);
 
 
        e.target.removeEventListener("click", squareClick) // cant click again
@@ -97,25 +102,27 @@ function checkScore(players) {
 
         const crossWins = array.every(squareDiv => {
             const hasCross = allSquares[squareDiv].firstChild?.classList.contains("cross");
-         
             return hasCross;
         });
 
         if (crossWins) {
-            displayText.textContent = players[0].name + " wins";
+            displayText.textContent = players[0].name + " wins!";
             console.log("Cross wins detected!");
+            allSquares.forEach(square => square.removeEventListener("click", Game.squareClick));
             return; // Exit the loop if a win is found
         }
 
+
+
         const circleWins = array.every(squareDiv => {
             const hasCircle = allSquares[squareDiv].firstChild?.classList.contains("circle");
-           
             return hasCircle;
         });
 
         if (circleWins) {
             displayText.textContent = players[1].name + " wins";
             console.log("Circle wins detected!");
+            allSquares.forEach(square => square.removeEventListener("click", Game.squareClick));
             return; // Exit the loop if a win is found
         }
     });
