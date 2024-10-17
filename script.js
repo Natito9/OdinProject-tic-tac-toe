@@ -1,3 +1,4 @@
+let players = [];
 /// IIFE 
 const Gameboard = (() => {
     // my gameboard exist
@@ -34,7 +35,7 @@ const createPlayer = (name,mark) =>{
 
 //IIFE
 const Game = (() => {
-    let players = [];
+   
     // let gameOver;
     let turn = "cross";
 
@@ -49,7 +50,8 @@ const Game = (() => {
 
             Gameboard.render(); //board its shown
 
-            // console.log(`Player 1: ${players[0].name} with mark: ${players[0].mark}, Player 2: ${players[1].name} with mark: ${players[1].mark}`);
+            checkScore(players);
+
         });
     };
 
@@ -59,18 +61,19 @@ const Game = (() => {
 
         console.log("clicked", e);                          //log which div is clicked(for fun)
 
-        const turnDisplay = document.createElement ("div")  //create a div 
-        turnDisplay.classList.add(turn)                     //that div has a class of firstTurn = circle = css styling for .circle
-        e.target.append(turnDisplay)                        // apend this circle on div to my target ( square.div )
+        const turnDisplay = document.createElement("div");  //create a div 
+        turnDisplay.classList.add(turn);                     //that div has a class of firstTurn = circle = css styling for .circle
+        e.target.append(turnDisplay);                        // apend this circle on div to my target ( square.div )
        
+
         //alternate circle and cross        
-        turn = turn === "cross" ? "circle" : "cross"
+        turn = turn === "cross" ? "circle" : "cross";
 
         let displayText = document.querySelector(".infoDisplay");
         //connect turn with player
         const currentPlayer = turn ==="cross" ? players[0] : players[1];
         //display players name turn
-        displayText.textContent = "Its now " + currentPlayer.name + " turn's";
+        displayText.textContent = "Its now " + currentPlayer.name + "'s turn";
 
 
        e.target.removeEventListener("click", squareClick) // cant click again
@@ -82,26 +85,42 @@ const Game = (() => {
 
 })();// calling fx
 
-function checkScore () {
-    const allSquares = document.querySelectorAll(".square")
+function checkScore(players) {
+    const allSquares = document.querySelectorAll(".square");
     const winningCombination = [
-        [0,1,2], [3,4,5], [6,7,8],
-        [0,3,6], [1,4,7], [2,5,8],
-        [0,4,8], [2,4,6]
-    ]
+        [0, 1, 2], [3, 4, 5], [6, 7, 8],
+        [0, 3, 6], [1, 4, 7], [2, 5, 8],
+        [0, 4, 8], [2, 4, 6]
+    ];
 
     winningCombination.forEach(array => {
-        const circleWins = array.every(squareDiv =>
-             allSquares[squareDiv].firstChild?.classList.contains("cross") )
-        if (circleWins) {
-            displayText.textContent = "wins "
+
+        const crossWins = array.every(squareDiv => {
+            const hasCross = allSquares[squareDiv].firstChild?.classList.contains("cross");
+         
+            return hasCross;
+        });
+
+        if (crossWins) {
+            displayText.textContent = players[0].name + " wins";
+            console.log("Cross wins detected!");
+            return; // Exit the loop if a win is found
         }
 
-        const crossWins = 
+        const circleWins = array.every(squareDiv => {
+            const hasCircle = allSquares[squareDiv].firstChild?.classList.contains("circle");
+           
+            return hasCircle;
+        });
 
-    }
-
+        if (circleWins) {
+            displayText.textContent = players[1].name + " wins";
+            console.log("Circle wins detected!");
+            return; // Exit the loop if a win is found
+        }
+    });
 }
+
 
 
 
