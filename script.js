@@ -38,8 +38,6 @@ const createPlayer = (name,mark) =>{
 
 //IIFE
 const Game = (() => {
-   
-    // let gameOver;
     let turn = "cross";
 
     const start = () => {
@@ -57,8 +55,20 @@ const Game = (() => {
 
         });
     };
-
     start();
+
+
+    const restartGame = (gameboardElement) => { 
+
+        document.getElementById("restart-button").addEventListener("click", () => {
+            console.log("restart clicked");
+            const gameboardElement = document.querySelector("#gameboard"); // Define the element first
+            gameboardElement.innerHTML = ""; // Clear the gameboard
+            Gameboard.render();  //create board again
+        });
+    };
+    restartGame();
+    
 
     const squareClick = (e) => {
 
@@ -87,8 +97,8 @@ const Game = (() => {
     return {
         squareClick,
     };
-
 })();// calling fx
+
 
 function checkScore(players) {
     const allSquares = document.querySelectorAll(".square");
@@ -134,6 +144,7 @@ function checkScore(players) {
 
 
 
+
  
 
 
@@ -152,8 +163,10 @@ function checkScore(players) {
     // alternate 0 and X for easier handle each click DONE
     //each square has a number to be identified ( selector index) DONE
 
-    //function to compare numbers and wins / looses (module?)
-    //function winner (if fx)
+    //function to compare numbers and wins / looses (module?) DONE
+    //function winner (if fx) DONE
+
+    
     //fx rounds ( ++ winner player)
 
         //display score
