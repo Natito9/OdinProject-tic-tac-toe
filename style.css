@@ -1,21 +1,51 @@
+body {
+    background-image: url("Assets/notebooksheet.PNG") ;
+    background-repeat: no-repeat;
+    background-size:cover;
+
+
+
+}
+@media (min-width: 1000px) {
+    body {
+        background-size: 100%; /* Adjust to fit the width */
+    }
+}
+
+@media (min-height: 700px) {
+    body {
+        background-size: auto 100%; /* Adjust to fit the height */
+    }
+}
+
 #gameboard {
     width: 300px;
     height: 300px;
-    background-color: white;
     display: flex;
     flex-wrap: wrap;
     margin:auto; 
+    padding-top: 30px;
+    padding-bottom: 10px;
     
 }
 
 .square {
     width: 100px;
     height: 100px;
-    border: solid 1px black;
+    border: solid 2px black;
     box-sizing: border-box;
     display: grid;
 }
 
+
+.infoDisplay {
+    margin: 20px;
+    font-size: 1.5rem;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif, roboto;
+
+
+}
 #controls {
     margin: auto;
 }
