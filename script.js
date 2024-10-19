@@ -65,6 +65,7 @@ const Game = (() => {
             updateScoreboard(); 
 
             document.querySelector("#start-button").style.display = "none"; //hide button
+            document.querySelector("#gameboard").style.display = "flex"; //show gameboard
         });
     };
     start();
@@ -91,6 +92,19 @@ const Game = (() => {
             document.querySelector("#start-button").style.display = "block"; // Show the button again
         });
     };
+    // function updates the display text
+    function updateInfoDisplay(text) {
+        const infoDisplay = document.querySelector('.infoDisplay');
+        infoDisplay.textContent = text;
+
+        // Check if the text indicates it's the player's turn
+     if (text.includes("It's now")) {
+         infoDisplay.classList.add('active'); // Add active class
+     } else {
+         infoDisplay.classList.remove('active'); // Remove active class
+     }
+}
+
     restartGame();
     
     const squareClick = (e) => {
@@ -107,6 +121,7 @@ const Game = (() => {
         // display players name turn
         displayText.textContent = "It's now " + currentPlayer.name + "'s turn";
 
+        updateInfoDisplay(displayText.textContent);
         checkScore(players);
         e.target.removeEventListener("click", squareClick);
     };
@@ -164,3 +179,4 @@ function checkScore(players) {
         }
     });
 }
+

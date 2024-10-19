@@ -1,25 +1,26 @@
 body {
     height: 100vh;
-    background-image: url("Assets/notebooksheet.PNG") ;
+    background-image: url("Assets/notebook.jpg") ;
     background-repeat: no-repeat;
     background-size: contain; 
     background-position: center; 
     background-attachment: fixed;
-    backdrop-filter: blur(2px);
+    background-color: black;
+    font-family:"Courier New", Courier, monospace;
    
 
 }
-@media (min-width: 1000px) {
+@media (min-width: 600px) {
     body {
-        background-size: 100%; /* Adjust to fit the width */
+        background-size: 900%;
     }
 }
 
-@media (min-height: 700px) {
+ @media (min-height: 500px) {
     body {
-        background-size: auto 100%; /* Adjust to fit the height */
+        background-size: auto 90%; 
     }
-}
+} 
 
 
 #gameboard {
@@ -29,7 +30,7 @@ body {
     flex-wrap: wrap;
     margin: auto;
     padding-top: 90px;
-    padding-left: 50px ;
+    
     
 }
 
@@ -37,7 +38,7 @@ body {
 .square {
     width: 100px;
     height: 100px;
-    border: solid 3px rgba(0, 0, 0, 0.936);
+    border: solid 2px rgba(0, 0, 0, 0.936);
     box-sizing: border-box;
     display: grid;
     background-color: rgba(245, 245, 245, 0.471);
@@ -47,56 +48,94 @@ body {
 
 
 .infoDisplay {
-    margin: 20px;
+    margin: 20px auto;
+    width: 30%;
     font-size: 1.5rem;
     text-align: center;
-    font-family: Arial, Helvetica, sans-serif, roboto;
-
 
 }
-.display-round {
-    margin: 20px;
-    font-size: 1.5rem;
-    text-align: center;
-    font-family: Arial, Helvetica, sans-serif, roboto;
 
+/* New class for when it's the player's turn */
+.infoDisplay.active {
+    background-color: rgba(255, 255, 0, 0.5); /* Change to your desired color */
 }
+
+
 #controls {
     margin: auto;
+    padding: 10px;
     width: fit-content;
     height:30px;
 }
+
+
 .buttons {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
     padding:10px;
-
 }
+
+
 input {
     border-radius: 15px;
     padding: 10px;
     font-size: 1rem;
+    text-align: center;
 }
+
+
 button {
-    padding: 10px;
+    font-weight: bold;
+    align-self: center;
+    background-color: rgb(245, 245, 245);
+    background-image: none;
+    background-position: 0 90%;
+    background-repeat: repeat no-repeat;
+    background-size: 4px 3px;
+    border-radius: 15px 225px 255px 15px 15px 255px 225px 15px;
+    border-style: solid;
+    border-width: 2px;
+    box-shadow: rgba(0, 0, 0, .2) 15px 28px 25px -18px;
+    box-sizing: border-box;
+    color: #41403e;
+    cursor: pointer;
+    display: inline-block;
     font-size: 1rem;
-    color:whitesmoke;
-    border-radius: 20px;
-    background-color: rgba(42, 117, 238, 0.998);
-    border: none;
-    box-shadow: rgba(0, 0, 0, 0) 0 5px 5px 0px; 
+    line-height: 23px;
+    outline: none;
+    padding: .75rem;
+    text-decoration: none;
+    transition: all 235ms ease-in-out;
+    border-bottom-left-radius: 15px 255px;
+    border-bottom-right-radius: 225px 15px;
+    border-top-left-radius: 255px 15px;
+    border-top-right-radius: 15px 225px;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+
+
+button:hover {
+  box-shadow: rgba(0, 0, 0, .3) 2px 8px 8px -5px;
+  transform: translate3d(0, 2px, 0);
+}
+
+button:focus {
+  box-shadow: rgba(0, 0, 0, .3) 2px 8px 4px -6px;
 }
 
 .circle {
     height: 80px;
     width: 80px;
     border-radius: 50%;
-    border: solid 8px blue;
+    border: solid 12px rgb(56, 56, 255);
     box-sizing: border-box;
     margin:auto;
 }
+
 
 .cross {
     height: 90px;
@@ -104,12 +143,14 @@ button {
     position: relative;
 }
 
+
 .cross:before, .cross:after {
     content:"";
     position:absolute;
-    background-color: red;
+    background-color: rgb(252, 82, 82);
     transform: rotate(45deg);
 }
+
 
 .cross:before {
     left: 45%;
@@ -118,9 +159,17 @@ button {
     height: 90%;
 }
 
+
 .cross:after {
     top: 45%;
     left: 10%;
     width: 90%;
     height: 20%;
+}
+
+
+.display-round {
+    margin: 20px;
+    font-size: 1.5rem;
+    text-align: center;
 }
